@@ -1,0 +1,177 @@
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def add_node(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+        else:
+            temp = self.head
+            while temp.next:
+                temp = temp.next
+            temp.next = new_node
+
+class Graph:
+    def __init__(self, size):
+        self.adj_list = [[] for _ in range(size)]
+
+    def add_edge(self, src, dest):
+        self.adj_list[src].append(dest)
+        self.adj_list[dest].append(src)  # Para aresta bidirecional, se necessário
+
+    def bfs(self, start, destination):
+        visited = [False] * len(self.adj_list)
+        parent = [-1] * len(self.adj_list)
+
+        queue = deque()
+        queue.append(start)
+        visited[start] = True
+        parent[start] = -1
+
+        while queue:
+            current = queue.popleft()
+
+            if current == destination:
+                self.print_path(parent, start, destination)
+                return
+
+            for neighbor in self.adj_list[current]:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    queue.append(neighbor)
+                    parent[neighbor] = current
+
+        print("Caminho não encontrado até o destino.")
+
+    def print_path(self, parent, start, destination):
+        print(f"Caminho mais curto de {start} a {destination}: ", end="")
+        current = destination
+        while current != -1:
+            print(current, end=" ")
+            current = parent[current]
+        print()
+
+# Exemplo de uso
+list_example = LinkedList()
+for i in range(5):
+    list_example.add_node(i)
+
+graph_example = Graph(5)
+graph_example.add_edge(0, 1)
+graph_example.add_edge(1, 2)
+graph_example.add_edge(2, 3)
+graph_example.add_edge(3, 4)
+graph_example.add_edge(23, 70)
+graph_example.add_edge(71, 20)
+graph_example.add_edge(90, 81)
+graph_example.add_edge(61, 10)
+graph_example.add_edge(21, 35)
+graph_example.add_edge(78, 96)
+graph_example.add_edge(49, 42)
+graph_example.add_edge(86, 66)
+graph_example.add_edge(69, 24)
+graph_example.add_edge(6, 99)
+graph_example.add_edge(70, 79)
+graph_example.add_edge(15, 98)
+graph_example.add_edge(5, 71)
+graph_example.add_edge(53, 46)
+graph_example.add_edge(7, 3)
+graph_example.add_edge(89, 50)
+graph_example.add_edge(96, 1)
+graph_example.add_edge(32, 21)
+graph_example.add_edge(91, 11)
+graph_example.add_edge(26, 14)
+graph_example.add_edge(76, 10)
+graph_example.add_edge(73, 31)
+graph_example.add_edge(69, 15)
+graph_example.add_edge(82, 37)
+graph_example.add_edge(62, 43)
+graph_example.add_edge(77, 19)
+graph_example.add_edge(11, 64)
+graph_example.add_edge(97, 47)
+graph_example.add_edge(11, 67)
+graph_example.add_edge(41, 79)
+graph_example.add_edge(2, 63)
+graph_example.add_edge(69, 20)
+graph_example.add_edge(99, 58)
+graph_example.add_edge(70, 66)
+graph_example.add_edge(75, 87)
+graph_example.add_edge(77, 58)
+graph_example.add_edge(37, 37)
+graph_example.add_edge(77, 93)
+graph_example.add_edge(57, 18)
+graph_example.add_edge(83, 18)
+graph_example.add_edge(31, 43)
+graph_example.add_edge(73, 4)
+graph_example.add_edge(88, 26)
+graph_example.add_edge(26, 53)
+graph_example.add_edge(67, 47)
+graph_example.add_edge(68, 86)
+graph_example.add_edge(41, 45)
+graph_example.add_edge(83, 67)
+graph_example.add_edge(6, 94)
+graph_example.add_edge(40, 16)
+graph_example.add_edge(9, 78)
+graph_example.add_edge(95, 47)
+graph_example.add_edge(92, 64)
+graph_example.add_edge(14, 21)
+graph_example.add_edge(48, 3)
+graph_example.add_edge(21, 49)
+graph_example.add_edge(38, 67)
+graph_example.add_edge(58, 19)
+graph_example.add_edge(71, 84)
+graph_example.add_edge(29, 50)
+graph_example.add_edge(9, 97)
+graph_example.add_edge(35, 76)
+graph_example.add_edge(88, 4)
+graph_example.add_edge(50, 90)
+graph_example.add_edge(66, 13)
+graph_example.add_edge(50, 97)
+graph_example.add_edge(27, 8)
+graph_example.add_edge(95, 37)
+graph_example.add_edge(82, 82)
+graph_example.add_edge(36, 59)
+graph_example.add_edge(2, 77)
+graph_example.add_edge(2, 81)
+graph_example.add_edge(33, 92)
+graph_example.add_edge(59, 37)
+graph_example.add_edge(39, 30)
+graph_example.add_edge(3, 90)
+graph_example.add_edge(75, 91)
+graph_example.add_edge(65, 7)
+graph_example.add_edge(56, 84)
+graph_example.add_edge(40, 100)
+graph_example.add_edge(85, 43)
+graph_example.add_edge(2, 55)
+graph_example.add_edge(68, 28)
+graph_example.add_edge(11, 48)
+graph_example.add_edge(57, 38)
+graph_example.add_edge(56, 32)
+graph_example.add_edge(98, 62)
+graph_example.add_edge(2, 50)
+graph_example.add_edge(48, 31)
+graph_example.add_edge(97, 95)
+graph_example.add_edge(85, 88)
+graph_example.add_edge(37, 23)
+graph_example.add_edge(21, 1)
+graph_example.add_edge(84, 79)
+graph_example.add_edge(54, 76)
+graph_example.add_edge(25, 33)
+graph_example.add_edge(93, 82)
+graph_example.add_edge(51, 73)
+graph_example.add_edge(17, 75)
+graph_example.add_edge(18, 25)
+
+start_node = 0
+destination_node = 4
+
+
+graph_example.bfs(start_node, destination_node) 
